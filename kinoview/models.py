@@ -19,8 +19,8 @@ class Video(models.Model):
     image = models.CharField(max_length=2048, blank=True)
     price = models.PositiveSmallIntegerField(default=0)
     video_url = models.CharField(max_length=2048, blank=True)
-    relevant_ids = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
-    producer_id = models.ForeignKey(People, on_delete=models.CASCADE, blank=True, null=True)
+    relevant_ids = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='videos')
+    producer_id = models.ForeignKey(People, on_delete=models.CASCADE, blank=True, null=True, related_name='people')
 
     def __str__(self):
         return f"{self.title}, {self.issue_year}"
@@ -43,7 +43,7 @@ class Tag(models.Model):
 
 class Video_Tag(models.Model):
     video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
-    tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE)
+    tag_id = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='tags')
     def __str__(self):
         return f"{self.video_id.title}: {self.tag_id.name}"
 
@@ -60,14 +60,14 @@ class Note(models.Model):
     body = models.TextField(blank=True)
     posted = models.DateTimeField(auto_now_add=True)
     is_comment = models.BooleanField(default=False)
-    author_id = models.ForeignKey(Note_Author, on_delete=models.CASCADE)
+    author_id = models.ForeignKey(Note_Author, on_delete=models.CASCADE, related_name='authors')
 
     def __str__(self):
         return f"{self.title}"
 
 
 class Video_Note(models.Model):
-    note_id = models.ForeignKey(Note, on_delete=models.CASCADE)
+    note_id = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='notes')
     video_id = models.ForeignKey(Video, on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.note_id.title}: {self.video_id.title}"

@@ -1,21 +1,73 @@
-"""ip URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers, serializers, viewsets
+
+from .models import Video, Tag, Note, People, Video_Tag, Video_Note, Video_Actors, Note_Author
+
+class PeopleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = People
+        fields = '__all__'
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
+class Video_ActorsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Video_Actors
+        fields = '__all__'
+
+class VideoSerializer(serializers.ModelSerializer):
+    producer_id = PeopleSerializer()
+    class Meta:
+        model = Video
+        fields = '__all__'
+
+class Note_AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note_Author
+        fields = '__all__'
+
+class NoteSerializer(serializers.ModelSerializer):
+    author_id = Note_AuthorSerializer()
+    class Meta:
+        model = Note
+        fields = '__all__'
+
+class Video_TagSerializer(serializers.ModelSerializer):
+    video_id = VideoSerializer()
+    tag_id = TagSerializer()
+    class Meta:
+        model = Video_Tag
+        fields = '__all__'
+
+class Video_NoteSerializer(serializers.ModelSerializer):
+    video_id = VideoSerializer()
+    note_id = NoteSerializer()
+    class Meta:
+        model = Video_Note
+        fields = '__all__'
+
+class VideoViewSet(viewsets.ModelViewSet):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+
+class Video_TagViewSet(viewsets.ModelViewSet):
+    queryset = Video_Tag.objects.all()
+    serializer_class = Video_TagSerializer
+
+class Video_NoteViewSet(viewsets.ModelViewSet):
+    queryset = Video_Note.objects.all()
+    serializer_class = Video_NoteSerializer
+
+router = routers.DefaultRouter()
+router.register(r'videos', VideoViewSet)
+router.register(r'tags', Video_TagViewSet)
+router.register(r'notes', Video_NoteViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls))
 ]
