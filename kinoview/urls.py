@@ -63,11 +63,12 @@ class Video_NoteViewSet(viewsets.ModelViewSet):
     serializer_class = Video_NoteSerializer
 
 router = routers.DefaultRouter()
+
 router.register(r'videos', VideoViewSet)
 router.register(r'tags', Video_TagViewSet)
 router.register(r'notes', Video_NoteViewSet)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('', admin.site.urls)
 ]
