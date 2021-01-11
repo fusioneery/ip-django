@@ -6,9 +6,17 @@
 - Django
 - DjangoRESTFramework
 
+## Как запустить
+
+1. Установить python>=3
+2. Установить зависимости
+3. Запустить миграции
+4. Залить фикстуру
+5. python manage.py runserver
+
 ## Типовые запросы к БД:
 
-1. `SELECT * FROM kinoview_video` - получаем список всех видео
+1. `SELECT video.id as video_id, title, duration, image, tag.name as tag_name FROM kinoview_video_tag video_tag INNER JOIN kinoview_video video on video_tag.video_id_id = video.id INNER JOIN kinoview_tag tag on video_tag.tag_id_id = tag.id WHERE tag_name = 'новый год'` - получаем подборку фильмов по тегу
 2. `SELECT id, name FROM kinoview_tag WHERE is_genre` - получаем список всех категорий для видео
 3. `SELECT note.id as id, title, body, posted, is_comment, author.name as author FROM kinoview_note note INNER JOIN kinoview_note_author author on note.author_id_id = author.id` - получаем список всех заметок (статей и комментариев) вместе с именами их авторов
 4. `SELECT video.id as video_id, title, duration, people.name as producer FROM kinoview_video video INNER JOIN kinoview_people people on video.producer_id_id = people.id` - краткий список видео с продюсером

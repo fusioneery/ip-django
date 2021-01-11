@@ -25,12 +25,13 @@ class VideoAdmin(ImportExportModelAdmin):
         return format_html('<a href="{}">{}</a>', url, name)
     list_display=['title','issue_year', 'country','duration', 'rating', 'price', 'producer_id']
     search_fields=["title__lower__contains"]
+    ordering=['-issue_year']
 
 
 @admin.register(People)
 class PeopleAdmin(ImportExportModelAdmin):
     resource_class = PeopleResource
-
+     
 
 @admin.register(Tag)
 class TagAdmin(ImportExportModelAdmin):
@@ -55,6 +56,7 @@ class Video_NoteAdmin(ImportExportModelAdmin):
 @admin.register(Note)
 class NoteAdmin(ImportExportModelAdmin):
     resource_class = NoteResource
+    list_display=["title", "posted", "is_comment", "author_id"]
     actions=[make_comment, unmake_comment]
     list_filter=["is_comment"]
 

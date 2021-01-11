@@ -1,7 +1,6 @@
 from import_export import resources
 from .models import Tag, Video_Tag, Video, Video_Note, Video_Actors, Note, Note_Author, People
 
-
 class VideoResource(resources.ModelResource):
     class Meta:
         model = Video
