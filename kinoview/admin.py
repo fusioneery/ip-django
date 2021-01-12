@@ -23,7 +23,8 @@ class VideoAdmin(ImportExportModelAdmin):
             + urlencode({"id": f"{obj.id}"})
         )
         return format_html('<a href="{}">{}</a>', url, name)
-    list_display=['title','issue_year', 'country','duration', 'rating', 'price', 'producer_id']
+    list_display=['title','issue_year', 'country','duration', 'rating', 'price', 'producer_id', 'relevant_ids']
+    list_display_links=['relevant_ids']
     search_fields=["title__lower__contains"]
     ordering=['-issue_year']
 

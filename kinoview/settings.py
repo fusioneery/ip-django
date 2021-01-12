@@ -25,7 +25,7 @@ SECRET_KEY = 'dffgfgfdgdlkhmrlmlhtrk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ip-5-sem.std-670.ist.mospolytech.ru']
 
 
 # Application definition

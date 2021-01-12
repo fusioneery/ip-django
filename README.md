@@ -10,9 +10,10 @@
 
 1. Установить python>=3
 2. Установить зависимости
-3. Запустить миграции
-4. Залить фикстуру из db_dump.json
-5. python manage.py runserver
+3. python manage.py makemigrations
+4. python manage.py makemigrations kinoview
+5. python manage.py loaddata db_dump.json
+6. python manage.py runserver
 
 ## Типовые запросы к БД:
 
@@ -25,6 +26,7 @@
 ## Ссылки
 
 - [Github repo](https://github.com/fusioneery/ip-django)
+- [Landing](http://ip-5-sem-landing.std-670.ist.mospolytech.ru/)
 - [FIT Link to test](http://ip-5-sem.std-670.ist.mospolytech.ru/)
 
 ## Пользователи для входа:
