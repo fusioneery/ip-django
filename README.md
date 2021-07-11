@@ -27,7 +27,8 @@
 
 - [Github repo](https://github.com/fusioneery/ip-django)
 - [Landing](http://ip-5-sem-landing.std-670.ist.mospolytech.ru/)
-- [FIT Link to test](http://ip-5-sem.std-670.ist.mospolytech.ru/)
+- [FIT Link to Admin panel (CRUD)](http://ip-6.std-670.ist.mospolytech.ru/)
+- [FIT Link to Frontend](http://ip-6-front.std-670.ist.mospolytech.ru/)
 
 ## Пользователи для входа:
 
